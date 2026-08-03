@@ -1,0 +1,15 @@
+auth:
+  type: DISABLED
+kafka:
+  clusters:
+  - bootstrapServers: kafka:9092
+    name: Local
+    properties:
+      security.protocol: SASL_PLAINTEXT
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required
+        username="root" password="s3cr3t";
+    readOnly: false
+rbac:
+  roles: []
+webclient: {}

@@ -1,0 +1,59 @@
+# - --smp specify the number of shards. since scylla follow shard-per-core architecture
+#   it is recommend to set this to the number of cores in production.
+# - --overprovisioned flag tells scylla that the environment is shared with other 
+#   containers, normally scylla recommends having a dedicated CPU per shard to
+#   perform optimally.
+
+services:
+  scylla1:
+    container_name: scylla1
+    image: scylladb/scylla:2026.2.1
+    command: >
+      --developer-mode 1
+      --overprovisioned 1
+      --seeds=scylla1,scylla2
+      --smp 1
+    ports:
+      - "9042"
+    volumes:
+      - scylla1-data:/var/lib/scylla
+    networks:
+      - dev-network
+
+  scylla2:
+    container_name: scylla2
+    image: scylladb/scylla:2026.2.1
+    command: >
+      --developer-mode 1
+      --overprovisioned 1
+      --seeds=scylla1,scylla2
+      --smp 1
+    ports:
+      - "9042"
+    volumes:
+      - scylla2-data:/var/lib/scylla
+    networks:
+      - dev-network
+    depends_on:
+      - scylla1
+
+  scylla_haproxy:
+    container_name: scylla_haproxy
+    image: haproxy:3.4.2
+    ports:
+      - "9042:9042"
+    volumes:
+      - ./volumes/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - scylla1
+      - scylla2
+    networks:
+      - dev-network
+
+volumes:
+  scylla1-data:
+  scylla2-data:
+
+networks:
+  dev-network:
+    external: true

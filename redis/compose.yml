@@ -1,0 +1,55 @@
+services:
+  redis-1:
+    container_name: redis-1
+    image: redis:8.6.4
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --appendonly yes
+      --requirepass s3cr3t
+      --masterauth s3cr3t
+    volumes:
+      - redis-1-data:/data
+    networks:
+      - dev-network
+
+  redis-2:
+    container_name: redis-2
+    image: redis:8.6.4
+    depends_on:
+      - redis-1
+    command: >
+      redis-server
+      --replicaof redis-1 6379
+      --appendonly yes
+      --requirepass s3cr3t
+      --masterauth s3cr3t
+    volumes:
+      - redis-2-data:/data
+    networks:
+      - dev-network
+
+  redis-sentinel:
+    container_name: redis-sentinel
+    image: redis:8.6.4
+    depends_on:
+      - redis-1
+      - redis-2
+    ports:
+      - "26379"
+    volumes:
+      - ./volumes/sentinel/sentinel.conf:/etc/redis/sentinel.conf
+    command: 
+      - redis-sentinel
+      - /etc/redis/sentinel.conf
+    networks:
+      - dev-network
+
+volumes:
+  redis-1-data:
+  redis-2-data:
+
+networks:
+  dev-network:
+    external: true
