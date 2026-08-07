@@ -23,6 +23,7 @@ A simple repository consisting of stacks used across my other projects.
 
 |     Service    | Port  | Forwarded |  Containers   |
 |----------------|-------|-----------|---------------|
+| Postgres       | 5432  |    5432   | `postgres`    |
 | Kafka          | 9092  |     -     | `kafka`       |
 | Kafka UI       | 8080  |    7500   | `kafka-ui`    |
 | Redis          | 6379  |    6379   | `redis-1` `redis-2` |
