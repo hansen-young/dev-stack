@@ -31,3 +31,13 @@ A simple repository consisting of stacks used across my other projects.
 | ScyllaDB       | 9042  |    9042   | `scylla_haproxy` `scylla1` `scylla2` |
 |                |       |           |               |
 |                |       |           |               |
+
+### Monitoring
+
+|     Service    | Port  | Forwarded |  Containers   |
+|----------------|-------|-----------|---------------|
+| Docker Monitor | 8080  |    -      | `cadvisor`    |
+|                | 9090  |   9090    | `prometheus`  |
+|                | 3000  |   7600    | `grafana`     |
+|                | 9308  |    -      | `kafka_exporter` |
+|                |       |           |               |
