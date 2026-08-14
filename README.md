@@ -25,7 +25,6 @@ A simple repository consisting of stacks used across my other projects.
 |----------------|-------|-----------|---------------|
 | Postgres       | 5432  |    5432   | `postgres`    |
 | Kafka          | 9092  |     -     | `kafka`       |
-| Kafka UI       | 8080  |    7500   | `kafka-ui`    |
 | Redis          | 6379  |    6379   | `redis-1` `redis-2` |
 | Redis Sentinel | 26379 |     -     | `redis-sentinel` |
 | ScyllaDB       | 9042  |    9042   | `scylla_haproxy` `scylla1` `scylla2` |
@@ -40,4 +39,5 @@ A simple repository consisting of stacks used across my other projects.
 |                | 9090  |   9090    | `prometheus`  |
 |                | 3000  |   7600    | `grafana`     |
 |                | 9308  |    -      | `kafka_exporter` |
+| Kafka UI       | 8080  |   7500    | `kafka-ui`    |
 |                |       |           |               |
