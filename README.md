@@ -29,7 +29,6 @@ A simple repository consisting of stacks used across my other projects.
 | Redis Sentinel | 26379 |     -     | `redis-sentinel` |
 | ScyllaDB       | 9042  |    9042   | `scylla_haproxy` `scylla1` `scylla2` |
 |                |       |           |               |
-|                |       |           |               |
 
 ### Monitoring
 
@@ -40,4 +39,9 @@ A simple repository consisting of stacks used across my other projects.
 |                | 3000  |   7600    | `grafana`     |
 |                | 9308  |    -      | `kafka_exporter` |
 | Kafka UI       | 8080  |   7500    | `kafka-ui`    |
+| OTEL Collector | 4317, 4318 | 4137, 4318 | `ingester` |
+| Signoz UI      | 8080  |   7800    | `signoz-signoz-0` |
+|                | 5432  |    -      | `signoz-metastore-postgres-0` |
+|                | 9181, 9234 |  -   | `signoz-telemetrykeeper-clickhousekeeper-0` |
+|                | 9000  |    -      | `signoz-telemetrystore-clickhouse-0-0` |
 |                |       |           |               |
