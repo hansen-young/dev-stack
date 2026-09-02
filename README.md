@@ -25,6 +25,7 @@ A simple repository consisting of stacks used across my other projects.
 |----------------|-------|-----------|---------------|
 | Postgres       | 5432  |    5432   | `postgres`    |
 | Kafka          | 9092  |     -     | `kafka`       |
+| MLflow         | 5000  |    5000   | `mlflow`      |
 | MongoDB        | 27017 |   27017   | `mongo`       |
 | Redis          | 6379  |    6379   | `redis-1` `redis-2` |
 | Redis Sentinel | 26379 |     -     | `redis-sentinel` |
