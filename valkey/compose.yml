@@ -1,0 +1,18 @@
+services:
+  valkey:
+    container_name: valkey
+    image: valkey/valkey:9.1
+    ports:
+      - "6378:6379"
+    command: valkey-server --save 30 1 --loglevel warning --requirepass s3cr3t
+    volumes:
+      - valkey-data:/data
+    networks:
+      - dev-network
+
+volumes:
+  valkey-data:
+
+networks:
+  dev-network:
+    external: true

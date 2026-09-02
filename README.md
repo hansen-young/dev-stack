@@ -29,6 +29,7 @@ A simple repository consisting of stacks used across my other projects.
 | Redis          | 6379  |    6379   | `redis-1` `redis-2` |
 | Redis Sentinel | 26379 |     -     | `redis-sentinel` |
 | ScyllaDB       | 9042  |    9042   | `scylla_haproxy` `scylla1` `scylla2` |
+| Valkey         | 6379  |    6378   | `valkey`      |
 |                |       |           |               |
 
 ### Monitoring
