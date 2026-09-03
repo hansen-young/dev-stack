@@ -1,7 +1,7 @@
 {
   "spec": {
     "display": {
-      "name": "Container Metrics",
+      "name": "Container Metrics - Minikube",
       "description": ""
     },
     "variables": [
@@ -31,7 +31,29 @@
         "kind": "ListVariable",
         "spec": {
           "display": {
-            "name": "container",
+            "name": "namespace",
+            "description": ""
+          },
+          "allowAllValue": false,
+          "allowMultiple": false,
+          "customAllValue": "",
+          "capturingRegexp": "",
+          "sort": "none",
+          "plugin": {
+            "kind": "signoz/DynamicVariable",
+            "spec": {
+              "name": "namespace",
+              "signal": "all"
+            }
+          },
+          "name": "namespace"
+        }
+      },
+      {
+        "kind": "ListVariable",
+        "spec": {
+          "display": {
+            "name": "pod",
             "description": ""
           },
           "allowAllValue": true,
@@ -42,11 +64,11 @@
           "plugin": {
             "kind": "signoz/DynamicVariable",
             "spec": {
-              "name": "container_label_com_docker_compose_service",
+              "name": "pod",
               "signal": "metrics"
             }
           },
-          "name": "container"
+          "name": "pod"
         }
       }
     ],
@@ -118,21 +140,21 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS AND name IN \"$container\""
+                            "expression": "service.instance.id = $source"
                           },
                           "groupBy": [
                             {
-                              "name": "name",
+                              "name": "service.instance.id",
                               "signal": "",
-                              "fieldContext": "",
-                              "fieldDataType": ""
+                              "fieldContext": "attribute",
+                              "fieldDataType": "string"
                             }
                           ],
                           "order": null,
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{name}}"
+                          "legend": "{{service.instance.id}}"
                         }
                       }
                     ]
@@ -211,11 +233,11 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS"
+                            "expression": "service.instance.id = $source AND namespace = $namespace"
                           },
                           "groupBy": [
                             {
-                              "name": "service.instance.id",
+                              "name": "namespace",
                               "signal": "",
                               "fieldContext": "attribute",
                               "fieldDataType": "string"
@@ -225,7 +247,7 @@
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{service.instance.id}}"
+                          "legend": "{{namespace}}"
                         }
                       }
                     ]
@@ -304,21 +326,21 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS AND name IN \"$container\""
+                            "expression": "namespace = $namespace AND pod IN \"$pod\""
                           },
                           "groupBy": [
                             {
-                              "name": "name",
+                              "name": "pod",
                               "signal": "",
-                              "fieldContext": "attribute",
-                              "fieldDataType": "string"
+                              "fieldContext": "",
+                              "fieldDataType": ""
                             }
                           ],
                           "order": null,
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{name}}"
+                          "legend": "{{pod}}"
                         }
                       }
                     ]
@@ -397,11 +419,11 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS AND name IN \"$container\""
+                            "expression": "namespace = $namespace AND pod IN \"$pod\""
                           },
                           "groupBy": [
                             {
-                              "name": "name",
+                              "name": "pod",
                               "signal": "",
                               "fieldContext": "attribute",
                               "fieldDataType": "string"
@@ -411,7 +433,7 @@
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{name}}"
+                          "legend": "{{pod}}"
                         }
                       }
                     ]
@@ -490,11 +512,11 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS AND name IN \"$container\""
+                            "expression": "namespace = $namespace AND pod IN $pod"
                           },
                           "groupBy": [
                             {
-                              "name": "container_label_com_docker_compose_service",
+                              "name": "pod",
                               "signal": "",
                               "fieldContext": "attribute",
                               "fieldDataType": "string"
@@ -504,7 +526,7 @@
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{container_label_com_docker_compose_service}}"
+                          "legend": "{{pod}}"
                         }
                       }
                     ]
@@ -583,11 +605,11 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS AND name IN \"$container\""
+                            "expression": "service.instance.id = $source"
                           },
                           "groupBy": [
                             {
-                              "name": "name",
+                              "name": "service.instance.id",
                               "signal": "",
                               "fieldContext": "attribute",
                               "fieldDataType": "string"
@@ -597,7 +619,7 @@
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{name}}"
+                          "legend": "{{service.instance.id}}"
                         }
                       }
                     ]
@@ -676,21 +698,21 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS"
+                            "expression": "service.instance.id = $source AND namespace = $namespace"
                           },
                           "groupBy": [
                             {
-                              "name": "service.instance.id",
+                              "name": "namespace",
                               "signal": "",
-                              "fieldContext": "attribute",
-                              "fieldDataType": "string"
+                              "fieldContext": "",
+                              "fieldDataType": ""
                             }
                           ],
                           "order": null,
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{service.instance.id}}"
+                          "legend": "{{namespace}}"
                         }
                       }
                     ]
@@ -769,21 +791,21 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS AND name IN \"$container\""
+                            "expression": "namespace = $namespace AND pod IN \"$pod\""
                           },
                           "groupBy": [
                             {
-                              "name": "name",
+                              "name": "pod",
                               "signal": "",
-                              "fieldContext": "attribute",
-                              "fieldDataType": "string"
+                              "fieldContext": "",
+                              "fieldDataType": ""
                             }
                           ],
                           "order": null,
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{name}}"
+                          "legend": "{{pod}}"
                         }
                       }
                     ]
@@ -862,11 +884,11 @@
                           ],
                           "disabled": false,
                           "filter": {
-                            "expression": "service.instance.id = $source AND name EXISTS AND name IN \"$container\""
+                            "expression": "namespace = $namespace AND pod IN \"$pod\""
                           },
                           "groupBy": [
                             {
-                              "name": "name",
+                              "name": "pod",
                               "signal": "",
                               "fieldContext": "",
                               "fieldDataType": ""
@@ -876,7 +898,7 @@
                           "selectFields": null,
                           "secondaryAggregations": null,
                           "functions": null,
-                          "legend": "{{name}}"
+                          "legend": "{{pod}}"
                         }
                       }
                     ]

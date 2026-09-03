@@ -24,6 +24,7 @@ services:
     volumes:
     - ./volumes/ingester/ingester.yaml:/etc/otel-collector-config.yaml:ro
     - ./volumes/ingester/opamp.yaml:/etc/opamp-config.yaml:ro
+    - ~/.minikube:/opt/.minikube:ro
   signoz-metastore-postgres-0:
     container_name: signoz-metastore-postgres-0
     environment:

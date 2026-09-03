@@ -95,6 +95,15 @@ receivers:
           static_configs:
             - targets: 
               - cadvisor:8080
+        - job_name: 'kube-cadvisor'
+          scheme: https
+          tls_config:
+            cert_file: /opt/.minikube/profiles/minikube/client.crt
+            key_file: /opt/.minikube/profiles/minikube/client.key
+            insecure_skip_verify: true
+          metrics_path: /metrics/cadvisor
+          static_configs:
+            - targets: ['minikube:10250']
 service:
   extensions:
   - signoz_health_check
