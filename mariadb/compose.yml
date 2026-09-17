@@ -1,0 +1,24 @@
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:11.4
+    environment:
+      MARIADB_ROOT_PASSWORD: s3cr3t
+    ports:
+      - "3316:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dev-network
+
+volumes:
+  mariadb-data:
+
+networks:
+  dev-network:
+    external: true
